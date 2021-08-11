@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Shopping Cart</title>
+
+    <link rel="stylesheet" href="{% static 'cr/style.css' %}" media="screen" title="no title" charset="utf-8">
+    <script src="https://code.jquery.com/jquery-2.2.4.js" charset="utf-8"></script>
+    <meta name="robots" content="noindex,follow" />
+  </head>
+  <body>
+    <div class="shopping-cart">
+      <!-- Title -->
+      <div class="title">
+
+      </div>
+{% for i in ci %}
+      <!-- Product #1 -->
+      <div class="item">
+<!--        <div class="buttons">-->
+<!--          <span><i class="fa fa-trash"></i></span>-->
+        </div>
+
+        <div class="image">
+        <a href="{% url 'remove' i.prodt.id %}"><i class="fa fa-trash-o" style="font-size:15px"></i></a> &nbsp; &nbsp; <a href="{{i.prodt.get_url}}"><img src="{{i.prodt.img.url}}" alt="{{i.prodt.name}}" style="height:100; width:100;"/></a>
+        </div>
+
+        <div class="description">
+          <span>{{i.prodt.name}}</span><br>
+          <span>ID: {{i.prodt.id}}</span><br>
+            <span>Price: {{i.total}} <br><a href="{% url 'addcart' i.prodt.id %}"><i class="fa fa-plus" style="font-size:10px"></i></a> &nbsp;{{i.quan}} <a href="{% url 'cart_decrement' i.prodt.id %}"> <i class="fa fa-minus" style="font-size:10px"></i></a></span>
+            <span>{{i.prodt.desc}}</span><br>
+          <p>Qty : {{i.quan}}</p>
+        </div>
+ {% endfor %}
+<!--        <div class="quantity">-->
+<!--          <button class="plus-btn" type="button" name="button">-->
+<!--            <img src="{% static 'cr/plus.svg'%}" alt="" />-->
+<!--          </button>-->
+<!--          <input type="text" name="name" value="1">-->
+<!--          <button class="minus-btn" type="button" name="button">-->
+<!--            <img src="{% static 'cr/minus.svg'%}" alt="" />-->
+<!--          </button>-->
+<!--        </div>-->
+
+        <div class="total-price" style="color:white"><b>Total : RS {{t}}</b></div><br>
+      </div>
+
+
+      <!-- Product #2 -->
+
+    </div>
+
+  </body>
+</html>
+
+
+{% endblock %}
